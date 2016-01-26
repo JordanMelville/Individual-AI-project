@@ -20,8 +20,12 @@ package bot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
+
+import field.ShapeType;
 
 import moves.MoveType;
 
@@ -34,27 +38,37 @@ import moves.MoveType;
  * @author Jim van Eeden <jim@starapple.nl>
  */
 
+
+// implementation of breadth first search for research purposes.
+
 public class BotStarter {
 
 	public BotStarter() {}
 	
-	/**
-	 * Returns a random amount of random moves
-	 * @param state : current state of the bot
-	 * @param timeout : time to respond
-	 * @return : a list of moves to execute
-	 */
+// rule based approach to the tetris game to drop specific shapes in correct places, will implement searches as we go.
+	@SuppressWarnings("unchecked")
 	public ArrayList<MoveType> getMoves(BotState state, long timeout) {
+		
 		ArrayList<MoveType> moves = new ArrayList<MoveType>();
-		Random rnd = new Random();
 		
-		int nrOfMoves = rnd.nextInt(41);
-		List<MoveType> allMoves = Collections.unmodifiableList(Arrays.asList(MoveType.values()));
-		for(int n=0; n<=nrOfMoves; n++) {
-			moves.add(allMoves.get(rnd.nextInt(allMoves.size())));
-		}
+		if(state.getCurrentShape() == ShapeType.O) {
+	        moves.add(MoveType.RIGHT);
+	        moves.add(MoveType.RIGHT);
+	        moves.add(MoveType.RIGHT);
+	        moves.add(MoveType.DROP);
+	    }
+	    if(state.getCurrentShape() == ShapeType.I) {
+	        moves.add(MoveType.LEFT);
+	        moves.add(MoveType.LEFT);
+	        moves.add(MoveType.LEFT);
+	        moves.add(MoveType.DROP);
+	    }
+	    else 
+	        moves.add(MoveType.DROP);
+
+	    return moves;
+
 		
-		return moves;
 	}
 	
 	public static void main(String[] args)
