@@ -51,20 +51,45 @@ public class BotStarter {
 		
 		ArrayList<MoveType> moves = new ArrayList<MoveType>();
 		
+		if(state.getCurrentShape()== ShapeType.I) {
+			moves.add(MoveType.DROP);
+		}
+		
+		if(state.getCurrentShape() == ShapeType.J) {
+			moves.add(MoveType.LEFT);
+			moves.add(MoveType.LEFT);
+			moves.add(MoveType.LEFT);
+			moves.add(MoveType.DROP);
+			
+		}
+		if(state.getCurrentShape() == ShapeType.L) {
+			moves.add(MoveType.RIGHT);
+			moves.add(MoveType.RIGHT);
+			moves.add(MoveType.RIGHT);
+			moves.add(MoveType.DROP);
+		}
+		
 		if(state.getCurrentShape() == ShapeType.O) {
-	        moves.add(MoveType.RIGHT);
-	        moves.add(MoveType.RIGHT);
-	        moves.add(MoveType.RIGHT);
 	        moves.add(MoveType.DROP);
 	    }
-	    if(state.getCurrentShape() == ShapeType.I) {
+		
+	    if(state.getCurrentShape() == ShapeType.S) {
 	        moves.add(MoveType.LEFT);
 	        moves.add(MoveType.LEFT);
 	        moves.add(MoveType.LEFT);
 	        moves.add(MoveType.DROP);
 	    }
-	    else 
-	        moves.add(MoveType.DROP);
+	    
+	    if(state.getCurrentShape() == ShapeType.Z) {
+	    	moves.add(MoveType.RIGHT);
+	    	moves.add(MoveType.RIGHT);
+	    	moves.add(MoveType.RIGHT);
+	    	moves.add(MoveType.DROP);
+	    }
+	    if(state.getCurrentShape() == ShapeType.T){
+	    	moves.add(MoveType.DROP);
+	    }
+	    
 
 	    return moves;
 
