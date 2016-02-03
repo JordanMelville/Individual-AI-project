@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+import field.Cell;
+import field.Field;
 import field.ShapeType;
 
 import moves.MoveType;
@@ -45,8 +47,18 @@ public class BotStarter {
 
 	public BotStarter() {}
 	
+	private int icounter = 0;
+	private int jcounter = 0;
+	private int lcounter = 0;
+	private int ocounter = 0;
+	private int scounter = 0;
+	private int tcounter = 0; 
+	private int zcounter = 0;
+	
 // rule based approach to the tetris game to drop specific shapes in correct places, will implement searches as we go.
 	@SuppressWarnings("unchecked")
+	
+	
 	public ArrayList<MoveType> getMoves(BotState state, long timeout) {
 		
 		ArrayList<MoveType> moves = new ArrayList<MoveType>();
@@ -59,10 +71,12 @@ public class BotStarter {
 			moves.add(MoveType.LEFT);
 			moves.add(MoveType.LEFT);
 			moves.add(MoveType.LEFT);
+			moves.add(MoveType.LEFT);
 			moves.add(MoveType.DROP);
 			
 		}
 		if(state.getCurrentShape() == ShapeType.L) {
+			moves.add(MoveType.RIGHT);
 			moves.add(MoveType.RIGHT);
 			moves.add(MoveType.RIGHT);
 			moves.add(MoveType.RIGHT);
@@ -77,10 +91,12 @@ public class BotStarter {
 	        moves.add(MoveType.LEFT);
 	        moves.add(MoveType.LEFT);
 	        moves.add(MoveType.LEFT);
+	        moves.add(MoveType.LEFT);
 	        moves.add(MoveType.DROP);
 	    }
 	    
 	    if(state.getCurrentShape() == ShapeType.Z) {
+	    	moves.add(MoveType.RIGHT);
 	    	moves.add(MoveType.RIGHT);
 	    	moves.add(MoveType.RIGHT);
 	    	moves.add(MoveType.RIGHT);
@@ -90,11 +106,12 @@ public class BotStarter {
 	    	moves.add(MoveType.DROP);
 	    }
 	    
-
+       
 	    return moves;
 
 		
 	}
+
 	
 	public static void main(String[] args)
 	{
