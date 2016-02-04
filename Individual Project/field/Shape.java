@@ -229,4 +229,9 @@ public class Shape {
 	public ShapeType getType() {
 		return this.type;
 	}
+	
+	public int getSize() {
+		
+		return size;
+	}
 }

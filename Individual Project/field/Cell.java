@@ -89,6 +89,14 @@ public class Cell {
 		return this.state;
 	}
 	
+	// added in the be able to set the state of a cell.
+	
+	public void  setState(CellType cell) {
+		
+		this.state = cell;
+		
+	}
+	
 	public Point getLocation() {
 		return this.location;
 	}

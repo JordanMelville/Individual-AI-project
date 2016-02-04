@@ -68,6 +68,41 @@ public class Field {
 		return this.grid[x][y];
 	}
 	
+	
+	// added to count the total number of holes and as a move is carried out a check is done in the evaluation function to add a weight for every extra hole.
+	
+	public int getTotalHoles(){
+		int holes = 0;
+		
+		for(int i = 0; i < this.width; i++) {
+			for(int j = 0; j < this.height; j++) {
+				boolean fullCell = false;
+				if (this.grid[i][j].isBlock()) {
+					fullCell = true;
+				}
+				if(fullCell && this.grid[i][j].isEmpty()) {
+				      holes += 1;
+				}
+			}
+		}
+	
+		return holes;
+	}
+	
+	// weight for holes and landing height of shape taken from heuristics used to improve dellacherie's algorithm.
+	public double evaluationFunction(Shape currentShape, int combos) {
+		
+		double landingHeight = 0;
+		double heuristicScore = 0;
+		
+		landingHeight = this.getHeight() - currentShape.getLocation().getY() - currentShape.getSize()/2;
+		
+		heuristicScore = landingHeight * -4.500158825082766 + this.getTotalHoles() * -7.899265427351652;
+		
+		return heuristicScore;
+		
+	}
+	
 	public int getHeight() {
 		return this.height;
 	}
