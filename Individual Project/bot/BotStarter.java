@@ -18,18 +18,12 @@
 package bot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Random;
 
 import field.Cell;
 import field.Field;
 import field.Shape;
 import field.ShapeType;
-
+import moves.Move;
 import moves.MoveType;
 
 /**
@@ -57,9 +51,13 @@ public class BotStarter {
 		
 		// initialization of the variables.
 		ArrayList<MoveType> bestMoves = new ArrayList<MoveType>();
+		int leftMoveCount = 0;
 		int comboCount = 0;
 		int bestRotation = 0;
 		int bestLeftMove = 0;
+		double bestScore = 0.0;
+		double currentScore;
+		int leftMove = 0;
 		
 		// Grabbing the correct information required to make the best move possible.
 		Field field = state.getMyField();
@@ -73,11 +71,29 @@ public class BotStarter {
 		Shape nextShape = new Shape(nextPiece, field, state.getShapeLocation());
 		
 		
+		// calculate a score for the current move
+		currentScore = field.evaluationFunction(shape, comboCount);
+		
+		
+		
+		
+		// check to see if the current score is better than the best score.
+		if (currentScore > bestScore || bestScore == 0.0) {
+			bestScore = currentScore;
+			
+		}
+
+		
+		
+		// finally drop the piece in the desired location
+		bestMoves.add(MoveType.DROP);
 		
 		return bestMoves;
 		
 		
 	}
+
+	
 
 	
 	public static void main(String[] args)

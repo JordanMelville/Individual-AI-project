@@ -100,6 +100,9 @@ public class Shape {
 		this.setBlockLocations();
 	}
 	
+	
+	
+	
 	/**
 	 * Used for rotations
 	 * @return transposed matrix of current shape box

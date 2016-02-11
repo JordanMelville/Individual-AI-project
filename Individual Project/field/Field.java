@@ -29,15 +29,16 @@ import field.Cell;
  */
 
 public class Field {
-	
+	private String fieldString;
 	private int width;
 	private int height;
 	private Cell grid[][];
 
 	public Field(int width, int height, String fieldString) {
+		this.fieldString = fieldString;
 		this.width = width;
 		this.height = height;
-		
+	
 		parse(fieldString);
 	}
 	
@@ -89,6 +90,46 @@ public class Field {
 		return holes;
 	}
 	
+	// method to clone the field to lookahead for potential moves.
+	public Field clone() {
+		return new Field(this.height, this.width,this.fieldString);
+		
+	}
+	
+	
+	// uses the isLine method to quickly go through each row in the field and check to see whether they are a line.if so incremement the line total.
+	public int totalLines() {
+		int lineTotal = 0;
+		int i = 0;
+		
+		while(i < this.height) {
+			if(this.isLine(i)) {
+				lineTotal += 1;
+			}
+		}
+		
+		return lineTotal;
+		
+		
+	}
+
+	
+	// method added to detect whether a line is either empty or solid, if not then it is not a line.
+	private Boolean isLine(int row) {
+		
+		for(int i = 0; i < this.width; i++) {
+			if(this.grid[i][row].isEmpty()) {
+				return false;
+			}
+			else if(this.grid[i][row].isSolid()) {
+				return false;
+			}
+			
+		}
+		return true;
+		
+	}
+	
 	
 	
 	
@@ -97,10 +138,11 @@ public class Field {
 		
 		double landingHeight = 0;
 		double heuristicScore = 0;
+		int totalLines = this.totalLines();
 		
 		landingHeight = this.getHeight() - currentShape.getLocation().getY() - currentShape.getSize()/2;
 		
-		heuristicScore = landingHeight * -4.500158825082766 + this.getTotalHoles() * -7.899265427351652;
+		heuristicScore = landingHeight * -4.500158825082766 + this.getTotalHoles() * -7.899265427351652 + totalLines * combos * 4.4181268101392694;
 		
 		return heuristicScore;
 		
@@ -113,4 +155,7 @@ public class Field {
 	public int getWidth() {
 		return this.width;
 	}
+
+	
+	
 }
