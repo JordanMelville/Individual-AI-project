@@ -89,6 +89,9 @@ public class Field {
 		return holes;
 	}
 	
+	
+	
+	
 	// weight for holes and landing height of shape taken from heuristics used to improve dellacherie's algorithm.
 	public double evaluationFunction(Shape currentShape, int combos) {
 		

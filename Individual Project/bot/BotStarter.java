@@ -27,6 +27,7 @@ import java.util.Random;
 
 import field.Cell;
 import field.Field;
+import field.Shape;
 import field.ShapeType;
 
 import moves.MoveType;
@@ -47,13 +48,6 @@ public class BotStarter {
 
 	public BotStarter() {}
 	
-	private int icounter = 0;
-	private int jcounter = 0;
-	private int lcounter = 0;
-	private int ocounter = 0;
-	private int scounter = 0;
-	private int tcounter = 0; 
-	private int zcounter = 0;
 	
 // rule based approach to the tetris game to drop specific shapes in correct places, will implement searches as we go.
 	@SuppressWarnings("unchecked")
@@ -61,54 +55,27 @@ public class BotStarter {
 	
 	public ArrayList<MoveType> getMoves(BotState state, long timeout) {
 		
-		ArrayList<MoveType> moves = new ArrayList<MoveType>();
+		// initialization of the variables.
+		ArrayList<MoveType> bestMoves = new ArrayList<MoveType>();
+		int comboCount = 0;
+		int bestRotation = 0;
+		int bestLeftMove = 0;
 		
-		if(state.getCurrentShape()== ShapeType.I) {
-			moves.add(MoveType.DROP);
-		}
+		// Grabbing the correct information required to make the best move possible.
+		Field field = state.getMyField();
+		ShapeType currentPiece = state.getCurrentShape();
 		
-		if(state.getCurrentShape() == ShapeType.J) {
-			moves.add(MoveType.LEFT);
-			moves.add(MoveType.LEFT);
-			moves.add(MoveType.LEFT);
-			moves.add(MoveType.LEFT);
-			moves.add(MoveType.DROP);
-			
-		}
-		if(state.getCurrentShape() == ShapeType.L) {
-			moves.add(MoveType.RIGHT);
-			moves.add(MoveType.RIGHT);
-			moves.add(MoveType.RIGHT);
-			moves.add(MoveType.RIGHT);
-			moves.add(MoveType.DROP);
-		}
+		// using the state to get the next shape coming up for potential lookahead.
+		ShapeType nextPiece = state.getNextShape();
 		
-		if(state.getCurrentShape() == ShapeType.O) {
-	        moves.add(MoveType.DROP);
-	    }
+		// use the current shape information to create said shapes.
+		Shape shape = new Shape(currentPiece, field, state.getShapeLocation());
+		Shape nextShape = new Shape(nextPiece, field, state.getShapeLocation());
 		
-	    if(state.getCurrentShape() == ShapeType.S) {
-	        moves.add(MoveType.LEFT);
-	        moves.add(MoveType.LEFT);
-	        moves.add(MoveType.LEFT);
-	        moves.add(MoveType.LEFT);
-	        moves.add(MoveType.DROP);
-	    }
-	    
-	    if(state.getCurrentShape() == ShapeType.Z) {
-	    	moves.add(MoveType.RIGHT);
-	    	moves.add(MoveType.RIGHT);
-	    	moves.add(MoveType.RIGHT);
-	    	moves.add(MoveType.RIGHT);
-	    	moves.add(MoveType.DROP);
-	    }
-	    if(state.getCurrentShape() == ShapeType.T){
-	    	moves.add(MoveType.DROP);
-	    }
-	    
-       
-	    return moves;
-
+		
+		
+		return bestMoves;
+		
 		
 	}
 
