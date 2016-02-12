@@ -100,19 +100,20 @@ public class Field {
 	// uses the isLine method to quickly go through each row in the field and check to see whether they are a line.if so incremement the line total.
 	public int totalLines() {
 		int lineTotal = 0;
-		int i = 0;
 		
-		while(i < this.height) {
+		
+		for(int i = 0; i < this.height; i++)
 			if(this.isLine(i)) {
-				lineTotal += 1;
+				lineTotal++;
+				
 			}
+		return lineTotal;
 		}
 		
-		return lineTotal;
 		
 		
-	}
-
+		
+	
 	
 	// method added to detect whether a line is either empty or solid, if not then it is not a line.
 	private Boolean isLine(int row) {

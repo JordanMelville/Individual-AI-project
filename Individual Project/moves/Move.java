@@ -13,5 +13,6 @@ public class Move {
 	public ArrayList<MoveType> moves;
 	public Point finalCoordinate;
 	public double moveScore;
+	public int rotations;
 
 }
